@@ -1,0 +1,41 @@
+from collections import deque
+def pathprint(path, idx):
+  global n
+  if idx ==n:
+    print(n,end=" ")
+  if path[idx]==0: 
+    return
+  print(path[idx],end=" ")
+
+  pathprint(path,path[idx])
+
+n = int(input())
+
+dp= [0]*(n+1)
+q= deque()
+path=[0]*(n+1)
+dp[1]=1
+for i in range(2,n+1):
+    a=-1e9
+    b=-1e9
+    c=-1e9
+    dp[i]= dp[i-1]+1
+    a= dp[i-1]+1
+    if i %2 == 0:
+      if  dp[i]>dp[i//2]+1:
+        dp[i]=dp[i//2]+1
+        b= dp[i//2]+1
+        #dp[i]= min(dp[i-1]+1,dp[i//2]+1)
+    if i%3 ==0 :
+      if  dp[i]>dp[i//3]+1:
+        dp[i]=dp[i//3]+1
+        c=dp[i//3]+1
+
+    if dp[i]==a:
+      path[i]=i-1
+    elif dp[i]==b:
+      path[i]=i//2
+    else:
+      path[i]=i//3
+print(dp[n]-1)
+pathprint(path,n)
