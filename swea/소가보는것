@@ -1,0 +1,26 @@
+import sys
+n= int(input())
+cows=[]
+stack=[]
+answer=[]
+an=0
+for _ in range(n):
+  temp = int(sys.stdin.readline().rstrip())
+  # temp =int(input())
+  cows.append(temp)
+
+for i in range(n):
+  now = cows[i]
+  while stack:
+    if now>=stack[-1]:
+      stack.pop()
+    else:
+      an+=len(stack)
+      stack.append(now)
+      break    
+  if not stack:
+    stack.append(now)
+    continue
+
+sum=0
+print(an)
